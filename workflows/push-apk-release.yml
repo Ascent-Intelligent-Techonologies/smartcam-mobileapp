@@ -1,0 +1,76 @@
+name: Release APK
+on:
+  push:
+    branches: ['feature/wf-release', 'main', 'develop']
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    environment: cd-secrets
+    steps:
+      - name: echo refs
+        run: echo "${{ github.ref }} | ${{ github.ref_name }} | ${{ github.run_number }} | ${{ github.sha }}"
+      - uses: actions/checkout@v3   
+      - name: Retrieve FirebaseOptions
+        run: echo "${{secrets.FIREBASEOPTIONS }}" | base64 --decode  > lib/firebase_options.dart
+      - name: Retrieve AmplifyConfiguration
+        run: echo "${{secrets.AMPLIFYCONFIGURATION }}" | base64 --decode  > lib/amplifyconfiguration.dart
+      - name: Retrieve ENV
+        run: echo "${{secrets.ENV }}" | base64 --decode  > lib/env.dart
+      - name: Retrieve GOOGLESERVICES
+        run: echo "${{secrets.GOOGLESERVICES }}" | base64 --decode  > android/app/google-services.json
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: "12.x"
+          cache: 'gradle'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.7.0"
+          channel: 'stable'
+          cache: true
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Start release build
+        run: flutter build apk
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/apk/release/app-release.apk 
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Download release APK
+      uses: actions/download-artifact@v3
+      with:
+        name: release-apk
+        path: release-apk
+    
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.run_number }}
+        release_name: Release ${{ github.run_number }}
+        body: |
+          This is a new release.
+        draft: false
+        prerelease: false
+    - name: Upload release APK
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release-apk/app-release.apk
+        asset_name: app-release.apk
+        asset_content_type: application/vnd.android.package-archive

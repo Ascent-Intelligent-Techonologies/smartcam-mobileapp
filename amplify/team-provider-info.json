@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-scdashboard-dev-123147-authRole",
+      "UnauthRoleArn": "arn:aws:iam::021119367828:role/amplify-scdashboard-dev-123147-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::021119367828:role/amplify-scdashboard-dev-123147-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-scdashboard-dev-123147-deployment",
+      "UnauthRoleName": "amplify-scdashboard-dev-123147-unauthRole",
+      "StackName": "amplify-scdashboard-dev-123147",
+      "StackId": "arn:aws:cloudformation:ap-south-1:021119367828:stack/amplify-scdashboard-dev-123147/cd025480-a459-11ed-b42c-061fc358ced4",
+      "AmplifyAppId": "dj7b3xupupegj"
+    },
+    "categories": {
+      "auth": {
+        "scdashboard6fa9a7a7": {
+          "userPoolId": "ap-south-1_QH6sWxGPk",
+          "userPoolName": "AryamanTesting",
+          "webClientId": "1iup0tose4mpom304te8u86top",
+          "nativeClientId": "1iup0tose4mpom304te8u86top"
+        }
+      }
+    }
+  }
+}
