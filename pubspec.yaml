@@ -41,7 +41,7 @@ dependencies:
   json_annotation: ^4.8.0
   flutter_bloc: ^8.1.1
   equatable: ^2.0.5
-  flutter_svg: ^2.0.7
+  flutter_svg:
   chewie: ^1.4.0
   video_player: ^2.5.1
   amplify_flutter: ^0.6.12
@@ -67,8 +67,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
-  build_runner: ^2.3.3
+  flutter_lints:
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
