@@ -54,7 +54,7 @@ class _AlertDetailScreenState extends State<AlertDetailScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final token = snapshot.data;
-                  Clipboard.setData(ClipboardData(text: token));
+                  Clipboard.setData(ClipboardData(text: token ?? ""));
                   print(token);
                   final s3Key =
                       ApiClient.pathToKey(s3Path: widget.alert.s3Path!);

@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smartcam_dashboard/blocs/session_cubit/session_cubit.dart';
 import 'package:smartcam_dashboard/data/repositories/auth_repository.dart';
 
-class ExaAppBar extends StatefulWidget with PreferredSizeWidget {
+class ExaAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool showLogOutButton;
   const ExaAppBar({super.key, this.showLogOutButton = false});
 
