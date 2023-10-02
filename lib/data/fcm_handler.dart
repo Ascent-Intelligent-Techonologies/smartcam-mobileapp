@@ -14,13 +14,15 @@ class FCMHandler {
   static FCMHandler get instance => _instance;
   FCMHandler._internal();
   AlertsBloc? _alertsBloc;
-  void init() {
+  void init() async {
     try {
       FirebaseMessaging.instance.getToken();
     } catch (e) {
       logging(e.toString());
     }
 
+    final tok = await FirebaseMessaging.instance.getToken();
+    print('token: $tok');
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       logging('Got a message whilst in the foreground!');
       logging('Message data: ${message.data}');

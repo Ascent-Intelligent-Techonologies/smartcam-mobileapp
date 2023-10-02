@@ -32,15 +32,24 @@ This repo contains Mobile app SmartCam product
 ###### To Setup Notifications
 - (Skip this step if you want to use a existing project) Go to [Firebase](https://firebase.google.com/) to create a new firebase project.
 - Follow till Step 2 of [instructions](https://firebase.google.com/docs/flutter/setup?platform=android) to configure firebase cli and flutterfire cli as per your project.
-- Now you will be able to send notification to the topic `exwzd` from the firebase fcm console. Notifications will only be received if the user is logged in to the app.
+- Now you will be able to send notification to the topic `fovea` from the firebase fcm console. Notifications will only be received if the user is logged in to the app.
 
 ###### Server setup to send notifications (for poc-exaindia-xiss-ui_cloud feature/notification branch)
 - Login to your firebase console
 - Open your project
 - Go to Project Setting>Service Accounts>Firebase Admin SDK>Generate new private key
 - Rename the downloaded .json file to `firebaseServiceAccountKey.json`, place the file in the root of the fastapi server and run the server.
-- Now, for every raise_alert api call, a firebase notification will be sent to all the devices subscribed to 'exwzd' topic.
+- Now, for every raise_alert api call, a firebase notification will be sent to all the devices subscribed to 'fovea' topic.
 
+There are 4 places where we have to modify to change the resources of running this app.
+
+1. /android/app/google-services.json 
+2. /lib/amplifyconfiguration.dart
+3. env.dart
+4. firebase_options.dart
+
+
+you can run the command `flutter build apk --no-tree-shake-icons` and the final apk will be available at `build/app/outputs/flutter-apk/app-release.apk`
 ## Troubleshooting
 
 
